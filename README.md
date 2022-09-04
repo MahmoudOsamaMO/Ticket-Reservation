@@ -1,1 +1,3 @@
 # WakeCapTest
+
+update-database
