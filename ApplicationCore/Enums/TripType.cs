@@ -9,9 +9,9 @@ namespace ApplicationCore.Enums
 {
     public enum TripType
     {
-        [Description("Cairo-Aswan")]
-        Short,
         [Description("Cairo-Alexandria")]
+        Short,
+        [Description("Cairo-Aswan")]
         Long,
     }
 }

@@ -1,6 +1,7 @@
-using ApplicationCore.DTOs;
 using ApplicationCore.Services;
 using Infrastructure;
+using Infrastructure.Interfaces;
+using Infrastructure.Reposatories;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,11 @@ builder.Services.AddSwaggerGen();
 
 // Configure JSON logging to the console.
 builder.Logging.AddJsonConsole();
+
+#region Repositories
+builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddTransient<ITripRepository, TripRepository>();
+#endregion
 
 builder.Services.AddScoped<IReservetionService, ReservetionService>();
 
