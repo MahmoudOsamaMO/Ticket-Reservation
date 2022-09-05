@@ -1,3 +1,4 @@
+using ApplicationCore.Profiles;
 using ApplicationCore.Services;
 using Infrastructure;
 using Infrastructure.Interfaces;
@@ -28,6 +29,8 @@ builder.Services.AddSwaggerGen();
 
 // Configure JSON logging to the console.
 builder.Logging.AddJsonConsole();
+
+builder.Services.AddAutoMapper(typeof(TripProfile));
 
 #region Repositories
 builder.Services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));

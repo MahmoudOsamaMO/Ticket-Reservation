@@ -1,6 +1,6 @@
 namespace WeakCapUnitTests
 {
-    public class Tests
+    public class ReservetionServiceTests
     {
         [SetUp]
         public void Setup()

@@ -1,6 +1,7 @@
 ﻿using ApplicationCore.DTOs;
 using ApplicationCore.Enums;
 using ApplicationCore.Helpers;
+using AutoMapper;
 using Infrastructure.Interfaces;
 using Infrastructure.Models;
 using System;
@@ -14,9 +15,11 @@ namespace ApplicationCore.Services
     public class ReservetionService : IReservetionService
     {
         public readonly ITripRepository _tripRepository;
-        public ReservetionService(ITripRepository tripRepository)
+        private readonly IMapper _mapper;
+        public ReservetionService(ITripRepository tripRepository,IMapper mapper)
         {
             _tripRepository = tripRepository;
+            _mapper = mapper;
         }
         public async Task<List<FrequentReservedDto>> FrequentReserved()
         {
@@ -52,13 +55,8 @@ namespace ApplicationCore.Services
                     price = 0
                 }
                 );
-            return new ReservedTicketDto()
-            {
-                userEmail = trip.userEmail,
-                //seats = ticketRequestDto.seats
-                busId = "bus1",
-                price = trip.price,
-            };
+            var reservedTicketDto = _mapper.Map<ReservedTicketDto>(trip);
+            return reservedTicketDto;
         }
     }
 }
