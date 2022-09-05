@@ -9,7 +9,7 @@ namespace ApplicationCore.Services
 {
     public interface IReservetionService
     {
-        ReservedTicketDto ReserveSeats(TicketRequestDto ticketRequestDto);
-        List<FrequentReservedDto> FrequentReserved();
+        Task<ReservedTicketDto> ReserveSeats(TicketRequestDto ticketRequestDto);
+        Task<List<FrequentReservedDto>> FrequentReserved();
     }
 }

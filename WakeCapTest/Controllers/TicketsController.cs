@@ -2,11 +2,15 @@
 using ApplicationCore.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Core.Types;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace WakeCapTest.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    //[Authorize]
+    //[RequiredScope(RequiredScopesConfigurationKey = "AzureAd:Scopes")]
     public class TicketsController : Controller
     {
         private readonly ILogger<TicketsController> _logger;
@@ -19,9 +23,24 @@ namespace WakeCapTest.Controllers
         }
         // GET: TicketsController
         [HttpGet(Name = "GetMostFrequent")]
-        public IEnumerable<FrequentReservedDto> Get()
+        public async Task<IEnumerable<FrequentReservedDto>> Get()
         {
-            return _reservetionService.FrequentReserved();
+            var freqTeips = await _reservetionService.FrequentReserved();
+            _logger.LogInformation("Frequent Reserved fetched from the database");
+            return freqTeips;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ReserveTicket([FromBody] TicketRequestDto ticketRequestDto)
+        {
+            if (ticketRequestDto == null)
+            {
+                _logger.LogError("ticketRequestDto object sent from client is null.");
+                return BadRequest("ticketRequestDto object is null");
+            }
+            var ticket = await _reservetionService.ReserveSeats(ticketRequestDto);
+
+            return Ok(ticket);
         }
 
     }

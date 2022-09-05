@@ -2,6 +2,7 @@
 using ApplicationCore.Enums;
 using ApplicationCore.Helpers;
 using Infrastructure.Interfaces;
+using Infrastructure.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,10 @@ namespace ApplicationCore.Services
         {
             _tripRepository = tripRepository;
         }
-        public List<FrequentReservedDto> FrequentReserved()
+        public async Task<List<FrequentReservedDto>> FrequentReserved()
         {
             List<FrequentReservedDto> frequentList = null;
-            var trips = _tripRepository.GetFrequentReserved();
+            var trips = await _tripRepository.GetFrequentReserved();
             if (trips?.Count() > 0)
             {
                 frequentList = new List<FrequentReservedDto>();
@@ -38,9 +39,26 @@ namespace ApplicationCore.Services
             return frequentList;
         }
 
-        public ReservedTicketDto ReserveSeats(TicketRequestDto ticketRequestDto)
+        public async Task<ReservedTicketDto> ReserveSeats(TicketRequestDto ticketRequestDto)
         {
-            throw new NotImplementedException();
+            var trip = await _tripRepository.ReserveTrip(
+                new Trip()
+                {
+                    userEmail = ticketRequestDto.userEmail,
+                    tripType = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? ((int)TripType.Short) : ((int)TripType.Long),
+                    //seats = ticketRequestDto.seats
+                    busId = "bus1",
+                    ID = 1,
+                    price = 0
+                }
+                );
+            return new ReservedTicketDto()
+            {
+                userEmail = trip.userEmail,
+                //seats = ticketRequestDto.seats
+                busId = "bus1",
+                price = trip.price,
+            };
         }
     }
 }

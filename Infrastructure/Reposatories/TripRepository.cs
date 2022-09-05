@@ -1,5 +1,6 @@
 ﻿using Infrastructure.Interfaces;
 using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,10 +14,10 @@ namespace Infrastructure.Reposatories
         public TripRepository(WakeCapContext context) : base(context)
         {
         }
-        public IEnumerable<Trip> GetFrequentReserved()
+        public async Task<IEnumerable<Trip>> GetFrequentReserved()
         {
             List<Trip> frequentReserved = null;
-            var trips = _context.Trips.ToList();
+            var trips = await _context.Trips.ToListAsync();
             var users = trips.Select(t=>t.userEmail).Distinct().ToList();
             if (users.Any())
             {
@@ -38,6 +39,12 @@ namespace Infrastructure.Reposatories
                 }
             }
             return frequentReserved;
+        }
+
+        public async Task<Trip> ReserveTrip(Trip trip)
+        {
+            var t = await _context.AddAsync(trip);
+            return t.Entity;
         }
     }
 }

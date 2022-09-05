@@ -9,7 +9,8 @@ namespace Infrastructure.Interfaces
 {
     public interface ITripRepository : IGenericRepository<Trip>
     {
-        IEnumerable<Trip> GetFrequentReserved();
+        Task<IEnumerable<Trip>> GetFrequentReserved();
+        Task<Trip> ReserveTrip(Trip trip);
 
     }
 }
