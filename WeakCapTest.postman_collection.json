@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "e4956982-f02b-4828-a255-02c929916230",
+		"name": "WeakCapTest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3302305"
+	},
+	"item": [
+		{
+			"name": "Frequent Trips",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7244/Tickets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7244",
+					"path": [
+						"Tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Already Reserved",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userEmail\":\"example@gamil.com\",\r\n    \"tripRoute\":\"Cairo-Alexandria\",\r\n    \"seats\":[\"A01\",\"A02\",\"A03\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7244/Tickets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7244",
+					"path": [
+						"Tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "No capacity",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userEmail\":\"example@gamil.com\",\r\n    \"tripRoute\":\"Cairo-Alexandria\",\r\n    \"seats\":[\"A01\",\"A02\",\"A03\",\"A04\",\"A05\",\"A06\",\"A07\",\"A08\",\"A09\",\"A10\",\"A11\",\"A12\",\"A13\",\"A14\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7244/Tickets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7244",
+					"path": [
+						"Tickets"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reserve",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userEmail\":\"Mahmoud@gamil.com\",\r\n    \"tripRoute\":\"Cairo-Alexandria\",\r\n    \"seats\":[\"A10\",\"A11\",\"A12\",\"A13\",\"A14\"]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7244/Tickets",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7244",
+					"path": [
+						"Tickets"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
