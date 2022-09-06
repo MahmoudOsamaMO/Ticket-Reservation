@@ -4,6 +4,7 @@ using Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(WakeCapContext))]
-    partial class WakeCapContextModelSnapshot : ModelSnapshot
+    [Migration("20220906000015_rowVersion")]
+    partial class rowVersion
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,7 +56,7 @@ namespace Infrastructure.Migrations
 
                     b.HasIndex("tripId");
 
-                    b.ToTable("Seat", (string)null);
+                    b.ToTable("Seat");
 
                     b.HasData(
                         new
@@ -379,7 +381,7 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("ID");
 
-                    b.ToTable("Trips", (string)null);
+                    b.ToTable("Trips");
 
                     b.HasData(
                         new

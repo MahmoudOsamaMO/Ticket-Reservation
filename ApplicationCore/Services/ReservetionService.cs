@@ -16,7 +16,7 @@ namespace ApplicationCore.Services
     {
         public readonly ITripRepository _tripRepository;
         private readonly IMapper _mapper;
-        public ReservetionService(ITripRepository tripRepository,IMapper mapper)
+        public ReservetionService(ITripRepository tripRepository, IMapper mapper)
         {
             _tripRepository = tripRepository;
             _mapper = mapper;
@@ -44,19 +44,35 @@ namespace ApplicationCore.Services
 
         public async Task<ReservedTicketDto> ReserveSeats(TicketRequestDto ticketRequestDto)
         {
-            var trip = await _tripRepository.ReserveTrip(
-                new Trip()
+            try
+            {
+                if (ticketRequestDto != null && ticketRequestDto.seats.Any())
                 {
-                    userEmail = ticketRequestDto.userEmail,
-                    tripType = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? ((int)TripType.Short) : ((int)TripType.Long),
-                    //seats = ticketRequestDto.seats
-                    busId = "bus1",
-                    ID = 1,
-                    price = 0
+                    List<Seat> seats = new List<Seat>();
+                    foreach (var seat in ticketRequestDto.seats)
+                    {
+                        seats.Add(new Seat() { name = seat });
+                    }
+                    var trip = await _tripRepository.ReserveTrip(
+                              new Trip()
+                              {
+                                  userEmail = ticketRequestDto.userEmail,
+                                  tripType = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? ((int)TripType.Short) : ((int)TripType.Long),
+                                  seats = seats,
+                                  busId = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? "bus1" : "bus2",
+                              }
+                      );
+                    var reservedTicketDto = _mapper.Map<ReservedTicketDto>(trip);
+                    return reservedTicketDto;
                 }
-                );
-            var reservedTicketDto = _mapper.Map<ReservedTicketDto>(trip);
-            return reservedTicketDto;
+                return null;
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
         }
     }
 }

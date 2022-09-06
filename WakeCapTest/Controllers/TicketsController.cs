@@ -33,14 +33,21 @@ namespace WakeCapTest.Controllers
         [HttpPost]
         public async Task<IActionResult> ReserveTicket([FromBody] TicketRequestDto ticketRequestDto)
         {
-            if (ticketRequestDto == null)
+            try
             {
-                _logger.LogError("ticketRequestDto object sent from client is null.");
-                return BadRequest("ticketRequestDto object is null");
-            }
-            var ticket = await _reservetionService.ReserveSeats(ticketRequestDto);
+                if (ticketRequestDto == null)
+                {
+                    _logger.LogError("ticketRequestDto object sent from client is null.");
+                    return BadRequest("ticketRequestDto object is null");
+                }
+                var ticket = await _reservetionService.ReserveSeats(ticketRequestDto);
 
-            return Ok(ticket);
+                return Ok(ticket);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
     }
