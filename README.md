@@ -1,8 +1,9 @@
 # WakeCapTest
+------------
 
-1- download project 
-2- run update-database on package manger console with ifrastructre project on startup, to run migrations and seed data.
-3- this is file with solution called WeakCapTest.postman_collection.json that contain collevtion to run on postman.
+- download project 
+- run update-database on package manger console with ifrastructre project on startup, to run migrations and seed data.
+- this is file with solution called WeakCapTest.postman_collection.json that contain collevtion to run on postman.
 --------------------------------------------------------------------------------------------------------------------
 
 tring to follow Domain-Driven Design (DDD) principles (Onion Architecture) 
