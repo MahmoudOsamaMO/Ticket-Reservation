@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WakeCapTest", "WakeCapTest\WakeCapTest.csproj", "{AD9B0ED5-58D3-45B9-A0C7-1CED981611A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusReservationAPI", "WakeCapTest\BusReservationAPI.csproj", "{AD9B0ED5-58D3-45B9-A0C7-1CED981611A3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationCore", "ApplicationCore\ApplicationCore.csproj", "{2809137F-0153-4C07-8D47-76294D679F6C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{7ECA5EB6-4C8C-41FE-A3C0-3ABC74E87014}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WeakCapUnitTests", "WeakCapUnitTests\WeakCapUnitTests.csproj", "{3FEE440E-3370-4809-8CD2-DD37440BC9A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusReservationsTests", "WeakCapUnitTests\BusReservationsTests.csproj", "{3FEE440E-3370-4809-8CD2-DD37440BC9A0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Postman Collection", "Postman Collection", "{D73CF178-9346-4CC0-A0B4-0D6BE13188AC}"
 	ProjectSection(SolutionItems) = preProject
