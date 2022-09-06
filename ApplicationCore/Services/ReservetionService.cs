@@ -53,15 +53,14 @@ namespace ApplicationCore.Services
                     {
                         seats.Add(new Seat() { name = seat });
                     }
-                    var trip = await _tripRepository.ReserveTrip(
-                              new Trip()
-                              {
-                                  userEmail = ticketRequestDto.userEmail,
-                                  tripType = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? ((int)TripType.Short) : ((int)TripType.Long),
-                                  seats = seats,
-                                  busId = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? "bus1" : "bus2",
-                              }
-                      );
+                    var requTrip = new Trip()
+                    {
+                        userEmail = ticketRequestDto.userEmail,
+                        tripType = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? ((int)TripType.Short) : ((int)TripType.Long),
+                        seats = seats,
+                        busId = ticketRequestDto.tripRoute == TripType.Short.ToDescriptionString() ? "bus1" : "bus2",
+                    };
+                    var trip = await _tripRepository.ReserveTrip(requTrip);
                     var reservedTicketDto = _mapper.Map<ReservedTicketDto>(trip);
                     return reservedTicketDto;
                 }
